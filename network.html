@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네트워크 정리</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#네트워크">네트워크</a>
+<ul>
+<li><a href="#네트워크의-구성요소">네트워크의 구성요소</a></li>
+<li><a href="#네트워크의-구성-방식">네트워크의 구성 방식</a></li>
+<li><a href="#osi-7-layer">OSI 7 Layer</a></li>
+<li><a href="#데이터-송수신의-동작-원리">데이터 송수신의 동작 원리</a></li>
+<li><a href="#프로토콜">프로토콜</a></li>
+<li><a href="#ip-주소와-클래스">IP 주소와 클래스</a></li>
+<li><a href="#도메인-네임">도메인 네임</a></li>
+<li><a href="#인터넷-서비스">인터넷 서비스</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="네트워크">네트워크</h1>
+<h2 id="네트워크의-구성요소">네트워크의 구성요소</h2>
+<ul>
+<li>정보 기기 (컴퓨터, 프린터, 스캐너)</li>
+<li>송수신 장치 (LAN카드, 모뎀)</li>
+<li>전송 매체 (꼬임선, 동축 케이블, 광섬유 케이블)</li>
+</ul>
+<h2 id="네트워크의-구성-방식">네트워크의 구성 방식</h2>
+<ul>
+<li>
+<p>스타형</p>
+<ul>
+<li>중앙에 있는 허브를 중심으로 다른 컴퓨터들을 직접 연결</li>
+<li>허브가 고장나면 네트워크 마비<br>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/64d41dd0-57b1-4953-b468-9168192548b8/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T074647Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=ffb5fd4ce7c92e49e498c62fcbf210c1b2c8fc8685b9fec47d95899d4a6d705c&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></li>
+</ul>
+</li>
+<li>
+<p>링형</p>
+<ul>
+<li>이웃한 컴퓨터를 서로 연결하여 고리 형태로 구성 → 양방향 정보전송</li>
+<li>일부 회선에 문제가 있어도 정보 전송 가능하지만, 하나의 컴퓨터가 고장나면 전체 네트워크가 동작 X<br>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a20bef8c-59d2-4e56-9ce0-5f3e5923642d/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T074720Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=d19eb49b15444241fae5c4f8e43c6731d2ec6907b1f7f1d8a538b5c3c9f8e946&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></li>
+</ul>
+</li>
+<li>
+<p>그물형</p>
+<ul>
+<li>컴퓨터들을 직접 회선으로 연결</li>
+<li>일부 회선에 문제가 있어도 다른 경로를 통해 정보전송</li>
+<li>광대역 통신망에 사용, 회선 설치 비용 많이 듦<br>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/01dc1857-6fc9-492f-8306-edcf75ad2ef9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T074836Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=e6e9cd4f12c969a7bf208cadeadc697980533153a6397f82d535d8cbd28a6f7d&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></li>
+</ul>
+</li>
+<li>
+<p>버스형</p>
+<ul>
+<li>하나의 전송 회선에 여러 대의 컴퓨터가 연결</li>
+<li>저렴하지만 관리 어렵, 전송 대기상태 자주 발생<br>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4fdbb24a-2ba7-4b47-8efb-570bcaeed43a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T075101Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=c96fa92f431abeb58b29b3314823f48e9f0b6cc711646cc84a1ee8f14a49522c&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></li>
+</ul>
+</li>
+<li>
+<p>트리형</p>
+<ul>
+<li>중앙에 있는 하나의 컴퓨터에 일정 지역의 컴퓨터까지 하나의 회선으로 연결, 지역의 컴퓨터에는 여러대의 컴퓨터 연결</li>
+<li>쉽게 확장 가능, 중앙에 장애가 발생하면 전체 네트워크에 영향을 줌<br>
+<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/74b2fd76-7435-4ffb-8ec5-6d0f2a88becb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T075128Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=17b636d15f7cfffa3cd427d3f4c6a4532daafac30cf635cb78d991547ad1f679&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="osi-7-layer">OSI 7 Layer</h2>
+<ul>
+<li>Layer 7 (응용) - 사용자가 응용 프로세스에 접근할 수 있도록 해줌</li>
+<li>Layer 6 (표현) - 입력 또는 출력되는 데이터를 하나의 표현 형태로 변환</li>
+<li>Layer 5 (세션) - 통신 장치간의 상호작용 설정, 유지, 동기화</li>
+<li>Layer 4 (전송) - 정보를 전송할때 발신지 대 목적지 간에 제어와 에러를 관리</li>
+<li>Layer 3 (네트워크) - 정보를 발신지로부터 목적지로 전달할 책임을 갖는 계층</li>
+<li>Layer 2 (데이터 링크) - 오류없이 한 장치에서 다른 장치로 정보 전달</li>
+<li>Layer 1 (물리) - 물리적 매체로 정보전달</li>
+</ul>
+<h2 id="데이터-송수신의-동작-원리">데이터 송수신의 동작 원리</h2>
+<ul>
+<li>단방향 통신
+<ul>
+<li>하나의 통신 회선으로 두 장치를 연결해 한쪽 방향으로만 정보를 전송할 수 있음<br>
+EX) 라디오, 공중파 TV</li>
+</ul>
+</li>
+<li>반이중 통신
+<ul>
+<li>하나의 통신 회선으로 두 장치를 연결해 양쪽 방향으로 일차선 방식으로 전송할 수 있음<br>
+⇒ 한 쪽에서 정보를 보내면 한 쪽에서는 받을 수만 있음<br>
+ex) 무전기, 팩스</li>
+</ul>
+</li>
+<li>전이중통신
+<ul>
+<li>두 개의 통신 회선으로 두 장치를 연결해 양쪽 방향으로 동시에 정보를 주고 받을 수 있음<br>
+ex) 전화기, 컴퓨터 통신(OSI 7 Layer 사용)</li>
+</ul>
+</li>
+<li>직렬 전송
+<ul>
+<li>하나의 통신 회선을 이용해 한번에 한 비트씩 차례로 전송함<br>
+⇒ 전송 속도가 느리지만 회선 설치비용을 적게 들여 경제적임</li>
+</ul>
+</li>
+<li>병렬 전송
+<ul>
+<li>여러 개의 통신회선을 이용해 동시에 여러 비트씩 전송함<br>
+⇒ 전송 속도가 빠르지만 회선 설치비용이 많이 듬</li>
+</ul>
+</li>
+<li>동기 전송
+<ul>
+<li>송신측과 수신측이 하나의 기준 시간에 맞추어 동기화된 데이터를 주고 받음<br>
+EX) 고속 통신망</li>
+</ul>
+</li>
+<li>비동기 전송
+<ul>
+<li>송신측이 데이터를 전송하면 수신측은 시간적 위치에 관계없이 비동기화 된 데이터를 수신함<br>
+EX) 컴퓨터 통신(OSI 7 Layer 사용)</li>
+</ul>
+</li>
+</ul>
+<h2 id="프로토콜">프로토콜</h2>
+<ul>
+<li>TCP/IP : 인터넷 표준 프로토콜</li>
+<li>HTTP : 웹 상에서 정보를 주고받을 때 이용하는 프로토콜</li>
+<li>SMTP :  메일 보낼 때 이용하는 프로토콜</li>
+<li>POP3 : 메일 받을 때 이용하는 프로토콜</li>
+<li>FTP : 파일 전송 프로토콜</li>
+<li>TELNET : 원격지 컴퓨터 시스템에 로그인 할 수 있도록 도와주는 프로토콜</li>
+<li>DHCP : 클라이언트가 동적인 IP 주소를 할당받아 인터넷을 사용 할 수 있게 해주는 프로토콜</li>
+</ul>
+<h2 id="ip-주소와-클래스">IP 주소와 클래스</h2>
+<p>IPv4: 32비트</p>
+<p>IPv6: 128비트</p>
+<p>DNS: 각 사이트의 도메인 정보와 IP 정보를 데이터베이스에 보관하고 있다가 해당 사이트 접속을 원하는 신호가 오면 이를 번역해 해당 IP를 가진 사이트의 호스트 서버에 연결시켜주는 서버</p>
+<h2 id="도메인-네임">도메인 네임</h2>
+<p>IP 주소는 숫자로 구성되어 있어 사용자가 이용하는데 어려움이 있다.</p>
+<p>도메인 네임: IP 주소에서 사용하는 숫자를 문자로 바꾸어 우리가 쉽게 알 수 있도록 나타내는 것</p>
+<p>DNS에 의해 IP 주소를 자동으로 바꾸어 줌</p>
+<p><code>krnic.kisa.or.kr</code></p>
+<ol>
+<li><code>krnic</code> : 호스트 컴퓨터 이름</li>
+<li><code>kisa</code> : 소속 기관 이름</li>
+<li><code>or</code> : 소속 기관 종류</li>
+<li><code>kr</code> : 국가 도메인</li>
+</ol>
+<p><code>comsi.devleo.us</code></p>
+<ol>
+<li><code>comsi</code> : 호스트 컴퓨터 이름</li>
+<li><code>devleo</code> : 소속 기관 이름</li>
+<li><code>us</code> : 국가 도메인</li>
+</ol>
+<h3 id="국제-도메인과-국내-도메인">국제 도메인과 국내 도메인</h3>
+
+<table>
+<thead>
+<tr>
+<th>국가 분류</th>
+<th>도메인</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>국제</td>
+<td>com</td>
+<td>영리 법인</td>
+</tr>
+<tr>
+<td>국제</td>
+<td>org</td>
+<td>비영리 법인</td>
+</tr>
+<tr>
+<td>국제</td>
+<td>gov</td>
+<td>국가 기관</td>
+</tr>
+<tr>
+<td>국제</td>
+<td>info</td>
+<td>정보 제공</td>
+</tr>
+<tr>
+<td>국내</td>
+<td>co</td>
+<td>영리 법인</td>
+</tr>
+<tr>
+<td>국내</td>
+<td>or</td>
+<td>비영리 법인</td>
+</tr>
+<tr>
+<td>국내</td>
+<td>go</td>
+<td>국가 기관</td>
+</tr>
+<tr>
+<td>국내</td>
+<td>pe</td>
+<td>개인</td>
+</tr>
+</tbody>
+</table><h2 id="인터넷-서비스">인터넷 서비스</h2>
+<ul>
+<li>월드 와이드 웹 (WWW : World Wide Web)
+<ul>
+<li>인터넷에서 웹 페이지들의 정보를 쉽게 주고받을 수 있도록 하는 서비스</li>
+<li>HTTP 프로토콜 사용</li>
+<li>HTML 문서와 이들 문서들을 서로 연계시켜 구성하는 웹페이지들의 집합체</li>
+<li>소리, 그래픽, 동영상 등의 정보를 하이퍼링크 구조로 연결해 다양한 멀티미디어 정보 제공</li>
+</ul>
+</li>
+<li>사물인터넷 (IoT : Internet of Things)
+<ul>
+<li>센서와 통신 기능이 있는 기기들을 인터넷으로 연결해<br>
+사람의 개입 없이 수집한 정보를 서로 주고받아 스스로 일을 처리하는 기술<br>
+⇒ 취약한 보안, 사생활 침해 등 문제 발생</li>
+</ul>
+</li>
+<li>클라우드 서비스 (Cloud Service)
+<ul>
+<li>인터넷과 연결된 서버에 데이터나 소프트웨어를 저장해 놓고<br>
+필요할 때마다 정보 기기로 접속하여 사용할 수 있는 서비스</li>
+</ul>
+</li>
+<li>소셜 네트워크 서비스 (SNS : Social Network Service)
+<ul>
+<li>온라인 상에서 특정한 관심이나 활동을 공유하는 이용자끼리<br>
+사회적 관계를 맺고 대화나 정보를 교류하는 서비스<br>
+⇒ 저작권 침해, 개인에 대한 인권 침해 등 문제 발생</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+</body>
+
+</html>

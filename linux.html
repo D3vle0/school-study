@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리눅스 정리</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#리눅스">리눅스</a>
+<ul>
+<li><a href="#리눅스-소개와-역사">리눅스 소개와 역사</a></li>
+<li><a href="#리눅스의-시작과-종료">리눅스의 시작과 종료</a></li>
+<li><a href="#리눅스-기본-명령어">리눅스 기본 명령어</a></li>
+<li><a href="#사용자와-그룹-관련-명령어">사용자와 그룹 관련 명령어</a></li>
+<li><a href="#그-외-기본-기능">그 외 기본 기능</a></li>
+<li><a href="#소유와-허가권">소유와 허가권</a></li>
+<li><a href="#디스크-쿼터">디스크 쿼터</a></li>
+<li><a href="#파일-시스템의-관리">파일 시스템의 관리</a></li>
+<li><a href="#shell">Shell</a></li>
+<li><a href="#환경-변수">환경 변수</a></li>
+<li><a href="#bash-shell-주요-기능">bash shell 주요 기능</a></li>
+<li><a href="#파일의-압축과-묶기">파일의 압축과 묶기</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="리눅스">리눅스</h1>
+<h2 id="리눅스-소개와-역사">리눅스 소개와 역사</h2>
+<h3 id="리눅스의-특징">리눅스의 특징</h3>
+<ul>
+<li>1991년 리누스 토르발스가 버전 0.01 작성</li>
+<li>1992년 0.02 버전 공개</li>
+<li>리누스 토르발스는 커널만 개발</li>
+</ul>
+<h3 id="리눅스의-역사">리눅스의 역사</h3>
+<ul>
+<li>오픈소스 운영체제</li>
+<li>멀티태스킹</li>
+<li>다중 스레드를 지원하는 네트워크 OS</li>
+<li>여러 종류의 파일 시스템 지원</li>
+<li>유닉스와 호환</li>
+<li>POSIX 규격을 따름</li>
+<li>컴퓨터를 항상 켜 놓아도 안정적 운영</li>
+<li>SWAP 방식으로 램 효율성 UP</li>
+<li>최상위 디렉터리 아래에 계층 트리구조</li>
+</ul>
+<h3 id="리눅스-라이선스">리눅스 라이선스</h3>
+<ul>
+<li>켄 톰슨 - 초기 유닉스 개발</li>
+<li>데니스 리치 - C 개발</li>
+<li>리처드 스톨먼 - 1984년 GNU 시작</li>
+<li>리처드 스톨먼 - 1985년 FSF 설립</li>
+<li>앤드루 타넨바움 - 미닉스 (교육용 유닉스)</li>
+<li>리누스 토르발즈 - 미닉스 고쳐 GNU에 적합한 커널 개발</li>
+<li>스톨먼과 FSF는 리눅스를 GNU 커널로 채택</li>
+<li>GNU에서 제작한 소프트웨어를 지원함으로써 프로그램의 복제, 변경, 소스코드 사용에 대한 제한 철폐</li>
+<li>GPL 을 따름, 자유 소프트웨어의 수정과 공유 보장</li>
+<li>Freeware 라는 개념을 뛰어 넘어 진정한 자유에 대한 개념<br>
+→ 무료 소프트웨어를 유상으로 판매할 자유도 보장</li>
+</ul>
+<h2 id="리눅스의-시작과-종료">리눅스의 시작과 종료</h2>
+<p><code>shutdown -P +10</code> : 10분 후에 종료<br>
+<code>shutdown -r 22:00</code> : 22시에 재부팅<br>
+<code>shutdown -c</code> : 예약된 shutdown 취소<br>
+<code>shutdown -k +15</code> : 접속한 사람에게 15분 뒤 종료된다는 메세지를 보냄. 실제 종료 X<br>
+<code>-f</code> : 재부팅 과정에서 fsck를 실행하지 않음<br>
+재부팅 명령어: <code>reboot</code> , <code>shutdown -r now</code> , <code>init 6</code><br>
+로그아웃 명령어: <code>logout</code> , <code>exit</code></p>
+
+<table>
+<thead>
+<tr>
+<th>런 레벨</th>
+<th>영문 모드</th>
+<th>설명</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>power off</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>rescue</td>
+<td>시스템 복구모드</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>multi-user</td>
+<td></td>
+<td>사용 안함</td>
+</tr>
+<tr>
+<td>3</td>
+<td>multi-user</td>
+<td>텍스트 모드의 다중 사용자 모드</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>multi-user</td>
+<td></td>
+<td>사용 안함</td>
+</tr>
+<tr>
+<td>5</td>
+<td>graphical</td>
+<td>그래픽 모드의 다중 사용자 모드</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>reboot</td>
+<td>재부팅</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="리눅스-기본-명령어">리눅스 기본 명령어</h2>
+<p><code>ls</code> : 디렉토리 파일 목록 출력<br>
+<code>-a</code> : 모든 파일 출력(.으로 시작하는 파일(숨겨진 파일)도 보임)<br>
+<code>-l</code> : 자세한 정보 출력<br>
+<code>pwd</code> : 현재 위치<br>
+<code>cd</code> : 경로 이동<br>
+<code>mkdir</code> : 디렉토리 생성<br>
+<code>cp [OPTION] SOURCE DEST</code> : 파일 및 디렉토리 복사<br>
+<code>-a</code> : 속성부분도 복사<br>
+<code>-f</code> : 복사할 곳에 기존 파일이 있으면 제거 후 복사<br>
+<code>-r</code> : 디렉토리를 재귀적으로 복사<br>
+<code>mv [OPTION] SOURCE DEST</code> : 파일 이름 변경 or 파일 위치 바꾸는 기능도 수행함.<br>
+<code>rmdir</code> : 디렉토리 삭제<br>
+<code>rm</code> : 파일 및 디렉토리 삭제<br>
+<code>-f</code> : 강제 삭제<br>
+<code>-r</code> : 디렉토리 재귀 삭제<br>
+<code>cat</code> : 파일 내용 출력<br>
+<code>echo</code> :화면에 할 말 출력</p>
+<h2 id="사용자와-그룹-관련-명령어">사용자와 그룹 관련 명령어</h2>
+<p><code>adduser ang</code> : ang 사용자 추가<br>
+<code>passwd ang</code> : ang 비번 변경<br>
+<code>usermod --groups test ang</code> : test 그룹에 ang 사용자 소속시킴<br>
+<code>userdel ang</code> : ang 삭제<br>
+<code>groups</code> : 현재 사용자가 속한 그룹<br>
+<code>groupadd test</code> : test 그룹 생성<br>
+<code>groupmod --new-name newtest test</code> : test → newtest 그룹이름 변경<br>
+<code>groupdel newtest</code> : newtest 그룹 삭제<br>
+<code>gpasswd newtest</code> : 그룹 암호 설정<br>
+<code>users</code> : 사용자 정보 출력<br>
+<code>who</code> : 시스템에 접속해있는 사용자 조회<br>
+<code>w</code> : 현재 접속 중인 사용자들의 정보 나타냄</p>
+<h2 id="그-외-기본-기능">그 외 기본 기능</h2>
+<p><code>|</code> (pipe) : 이전 명령의 출력 결과가 다음 명령의 입력<br>
+redirection : 표준 입출력 방향을 바꿔줌<br>
+<code>ls -l &gt; test</code> : ls -l 결과를 test에 저장 (덮어씌움)<br>
+<code>ls -l &gt;&gt; test</code> : ls -l 결과를 test에 추가 (append)</p>
+<h2 id="소유와-허가권">소유와 허가권</h2>
+<p><code>chmod 777 test</code> , <code>chmod ugo+rwx test</code> , <code>chmod ugo=rwx test</code><br>
+<code>chown ang file</code> : file 의 소유권을 ang 에게 준다<br>
+<code>chown newtest.ang file</code> : file 소유권을 newtest 그룹, ang 사용자에게 준다<br>
+<code>chgrp newtest file</code> : file 의 소유권을 newtest 그룹에게 준다<br>
+umask: 파일 666, 디렉토리 777에서 umask 값을 빼고 권한 주어짐</p>
+
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>코드</th>
+<th>절댓값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setUID</td>
+<td>s</td>
+<td>4000</td>
+<td>프로세스 실행 당시 UID로 설정</td>
+</tr>
+<tr>
+<td>setGID</td>
+<td>s</td>
+<td>2000</td>
+<td>프로세스 실행 당시 GID로 설정</td>
+</tr>
+<tr>
+<td>sticky bit</td>
+<td>t</td>
+<td>1000</td>
+<td>실행 후에도 메모리 점유</td>
+</tr>
+</tbody>
+</table><ul>
+<li>코드가 s인 권한은 실행권한이 있을때 s, 없을때 S 가 붙음</li>
+<li>sticky bit: 누구나 생성 가능하지만 디렉토리 안의 내용은 소유자나 root 만이 변경 가능</li>
+</ul>
+<h2 id="디스크-쿼터">디스크 쿼터</h2>
+<p>파일 시스템마다 생성할 수 있는 파일의 용량 및 개수를 제한<br>
+quotacheck → edquota → quotaon → repquota</p>
+<h2 id="파일-시스템의-관리">파일 시스템의 관리</h2>
+<ul>
+<li>ext: 초기 파일시스템</li>
+<li>ext2: ext 다음버전</li>
+<li>ext3: 저널링 지원</li>
+<li>ext4: 파일 접근 속도 향상 및 단편화 줄이도록 설계, 16TB 지원</li>
+</ul>
+<p>저널링: 시스템의 비정상적인 종료 시 저널(로그)을 이용해 빠르면서도 안정적인 복구가 가능</p>
+<p>네트워크 파일 시스템: 삼바 (SMB), NFS (파일 공유)</p>
+<p>기타 지원가능 파일 시스템: FAT, VFAT, FAT32, NTFS</p>
+<ol>
+<li>mount, umount : 장치와 디렉터리를 연결, 연결해제(umount임을 주의할것, unmount가 아님!!!)</li>
+<li>eject : 이동식 보조기억장치 (DVD, CD-ROM) 장치 제거</li>
+<li>fdisk : 새 파티션 생성, 삭제</li>
+<li>mkfs / mke2fs : 파일 시스템 생성, fdisk로 파티션 나눈 후 해당 파티션에 맞는 파일 시스템 생성<br>
+<code>-t</code> : 파일시스템 ext2, ext3 등 지정<br>
+<code>-c</code> : 배드블록 검사<br>
+<code>-j</code> : 파티션을 ext3으로 생성</li>
+<li>fsck : 파일 시스템의 무결성을 점검, <code>lost+found</code> 디렉토리에서 사용</li>
+<li>du : 디스크 사용량</li>
+<li>df : 디스크 남은 용량 확인<br>
+<code>-h</code> :사람이 보기 쉬운 형태로 바꿈(단위를 붙여줌)</li>
+</ol>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/810512b9-264b-44ff-9bb8-828fd2d4c589/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T082530Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=aac44f3ae13c1a6cd42ae239482bcca387734fae2b3042c210511b8c655c7c32&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></p>
+<ol start="8">
+<li>/etc/fstab : 파일 시스템 정보, 마운트 정보</li>
+</ol>
+<h2 id="shell">Shell</h2>
+<ul>
+<li>Bourne shell (sh) : “$”</li>
+<li>csh : “%”</li>
+</ul>
+<h3 id="bash">Bash</h3>
+<ul>
+<li>alias</li>
+<li>history</li>
+<li>연산 기능</li>
+<li>job control</li>
+<li>자동 완성 (tab)</li>
+<li>프롬포트 제어</li>
+</ul>
+<h3 id="shell-의-개념-및-종류">Shell 의 개념 및 종류</h3>
+<p>sh → csh → tcsh → ksh → bash → zsh</p>
+<h3 id="bourne-shell-계열">bourne shell 계열</h3>
+
+<table>
+<thead>
+<tr>
+<th>shell</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/bin/sh</code></td>
+<td>유닉스 기본 쉘</td>
+</tr>
+<tr>
+<td><code>bin/ksh</code></td>
+<td>AT&amp;T 개발, 명령어 완성기능,콘쉘</td>
+</tr>
+<tr>
+<td><code>/bin/bash</code></td>
+<td>본쉘 기반 GNU에서 개발, 리눅스 표준</td>
+</tr>
+<tr>
+<td><code>/bin/zsh</code></td>
+<td>폴 팔스타드, 콘쉘의 재작성</td>
+</tr>
+</tbody>
+</table><h3 id="c-shell-계열">C shell 계열</h3>
+
+<table>
+<thead>
+<tr>
+<th>shell</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/bin/csh</code></td>
+<td>버클리 대학의 빌조이, C언어 특징 포함</td>
+</tr>
+<tr>
+<td><code>/bin/tcsh</code></td>
+<td>확장 C쉘, BSD 계열에서 많이 사용</td>
+</tr>
+</tbody>
+</table><h2 id="환경-변수">환경 변수</h2>
+<p><code>export</code> : 환경변수 리스트 확인<br>
+<code>export FOO=bar</code> : 값 등록<br>
+<code>echo $FOO</code> : 값 확인<br>
+<code>export FOO=$FOO:foobar</code> : 값 추가<br>
+<code>unset FOO</code> : 정의 해제</p>
+<h2 id="bash-shell-주요-기능">bash shell 주요 기능</h2>
+<h3 id="history-관련">history 관련</h3>
+<p><code>!!</code> : 마지막으로 실행한 명령어 실행<br>
+<code>!n</code> : n번째 명령어 실행<br>
+<code>history n</code> : 최근에 실행한 n개의 명령 출력<br>
+<code>!string</code> : string 으로 시작하는 명령문 실행</p>
+<p>history 관련 간단 tip<br>
+시험범위는 아니지만 한가지 팁이 있다면 bash와 zsh 에서의 <code>history n</code> 작동 방식이 다릅니다. bash 에서는 최근 n개의 명령 출력한다면, zsh에서는 n번 부터 끝까지 출력합니다.<br>
+zsh 에서 특정 범위 history 를 출력하고 싶으면 <code>history [first] [last]</code> 형태로 사용하면 됩니다.<br>
+reference : <a href="https://superuser.com/questions/232457/zsh-output-whole-history">https://superuser.com/questions/232457/zsh-output-whole-history</a></p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ad9e28a2-573f-463f-842e-b11d2fa2818f/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210112%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20210112T082607Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=1a8f6a837e7350aefc409360094c5cdcbf0c4cf2a918c9a9e56cda6b8020f5f2&amp;X-Amz-SignedHeaders=host&amp;response-content-disposition=filename%20%3D%22Untitled.png%22" alt=""></p>
+<h3 id="alias-관련">alias 관련</h3>
+<p><code>alias</code> : 설정된 별명 확인<br>
+<code>alias foo='command'</code> : 새로운 별명 정의<br>
+<code>unalias</code> : 지정 해제</p>
+<h3 id="shell-script">shell script</h3>
+<p>전역 설정 파일: 모든 사용자 쉘 환경 제어</p>
+<ul>
+<li>/etc/profile</li>
+<li>/etc/bashrc</li>
+</ul>
+<p>지역 설정 파일: 개인 사용자 쉘 환경 제어</p>
+<ul>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+</ul>
+<h2 id="파일의-압축과-묶기">파일의 압축과 묶기</h2>
+<p>xz, bzip2, gzip 파일명 으로 압축을 하고 <code>-d</code> 옵션으로 풀어준다.<br>
+xz, bzip2 압축률이 좋은 편이다.</p>
+<p>tar: 묶음 파일을 만들어주거나 풀음<br>
+옵션을 붙일때 “-” 를 쓰지 않는다.</p>
+<p>동작: <code>c</code> (묶기), <code>x</code> (풀기)<br>
+옵션: <code>f</code> (파일 이름), <code>v</code> (과정 보이기), <code>J</code> (tar+xz), <code>z</code> (tar+gzip), <code>j</code> (tar+bzip2)</p>
+<p><code>tar cvf foo.tar ~/bar</code> : 묶기<br>
+<code>tar cvfz foo.tar.xz ~/bar</code> : bar 폴더 묶고 gzip 압축<br>
+<code>tar xvf foo.tar</code> : 풀기<br>
+<code>tar xvfJ foo.tar.xz ~/foobar</code> : foobar 폴더에 xz 압축 해제 후 tar 풀기</p>
+
+    </div>
+  </div>
+</body>
+
+</html>
